@@ -2,22 +2,12 @@ defmodule VersusTest do
   use ExUnit.Case
   doctest Versus
 
-  describe "conceal/1" do
-    test "replaces chars with asterisks" do
-      assert Versus.conceal("MagicSnowman32") == "******"
-    end
-
-    test "replaces first part for emails" do
-      assert Versus.conceal("elsa@arendelle.com") == "******@arendelle.com"
-    end
-  end
-
   describe "scrub/1" do
     test "scrubs personal data from json" do
       input = %{
         id: 123,
         name: "Elsa",
-        username: "xXfrozen_princessXx",
+        username: "xXfrozen@princessXx",
         email: "elsa@arendelle.com",
         age: 21,
         power: "ice ray",

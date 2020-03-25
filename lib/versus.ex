@@ -5,9 +5,10 @@ defmodule Versus do
     obj
     |> Enum.map(fn {key, val} ->
       case key do
-        :name -> {key, conceal(val)}
-        :email -> {key, conceal(val)}
-        :username -> {key, conceal(val)}
+        :email -> {key, conceal_email(val)}
+        :name -> {key, conceal_text(val)}
+        :password -> {key, conceal_text(val)}
+        :username -> {key, conceal_text(val)}
         other -> {key, scrub(val)}
       end
     end)
@@ -19,13 +20,6 @@ defmodule Versus do
   end
 
   def scrub(data), do: data
-
-  def conceal(str) do
-    case String.contains?(str, "@") do
-      true -> conceal_email(str)
-      false -> conceal_text(str)
-    end
-  end
 
   defp conceal_email(email) do
     [_name, domain] = String.split(email, "@")
